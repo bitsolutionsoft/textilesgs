@@ -24,7 +24,7 @@ exports.findOne=(req,res)=>{
         { res.send(data);}
     }); 
 }
-exports.getView=(res)=>{
+exports.getView=res=>{
  
     Empleado.getView((error,data) =>{
         if(error){  
@@ -33,8 +33,8 @@ exports.getView=(res)=>{
             }else{
                 res.status(500).send({message: "Error al consultar el empleado ",...error});
             }
-        }else
-        { res.send(data);}
+        }
+         res.send(data);
     }); 
 };
 exports.delete=(req,res)=>{

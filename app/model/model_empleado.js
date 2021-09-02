@@ -61,7 +61,7 @@ sql.query(
 );
 }
 
-Empleado.getView=(result)=>{
+Empleado.getView=result=>{
     sql.query(
         `call ingreso_empleado(${0},"${null}","${null}","${null}",${0},"${null}","${null}","view");`,
         (error,res)=>{
