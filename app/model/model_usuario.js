@@ -17,13 +17,13 @@ sql.query(
             return;
         }else{
         console.log(res);
-        console.log("Usuario Ingresado",{mesage: "Success",res:res});
+        console.log("Usuario Ingresado",{message: "Success",res:res});
         result(null,{message:"Success",res:res});
         }
     });
 }
 
-Usuario.udpate=(usuario,result)=>{
+Usuario.update=(usuario,result)=>{
     sql.query(
         `call ingreso_usuario(${usuario.idusuario},${usuario.idempleado},"${usuario.usuario}","${usuario.pass}","update");`,
         (error,res)=>{
@@ -33,7 +33,7 @@ Usuario.udpate=(usuario,result)=>{
                 return;
             }else{
             console.log(res);
-            console.log("Usuario Ingresado",{mesage: "Success",res:res});
+            console.log("Usuario Ingresado",{message: "Success",res:res});
             result(null,{message:"Success",res:res});
             }
         });
@@ -50,7 +50,7 @@ Usuario.findById=(id, result)=>{
             }
             if(res[0].length){
                 console.log(res[0]);
-                result(null, {mesage:"Success",res:res[0]});
+                result(null, {message:"Success",res:res[0]});
             }else{
                 result({error:"not_found"},null);
             }
@@ -69,7 +69,7 @@ Usuario.findById=(id, result)=>{
                 }
                 if(res[0].length){
                     console.log(res[0]);
-                    result(null, {mesage:"Success",res:res[0]});
+                    result(null, {message:"Success",res:res[0]});
                 }else{
                     result({error:"not_found"},null);
                 }
@@ -82,7 +82,7 @@ Usuario.findById=(id, result)=>{
             (error,res)=>{
                 if(error){
                     console.log(error);
-                    result(null, {mesage:"Success",res:res[0]});
+                    result(null, {message:"Success",res:res[0]});
                     return;
                 }else{
                     result(null,{message:"Success",res:res});
@@ -102,7 +102,7 @@ Usuario.findById=(id, result)=>{
                 }
                 if(res[0].length){
                     console.log(res[0]);
-                    result(null, {mesage:"Success",res:res[0]});
+                    result(null, {message:"Success",res:res[0]});
                 }else{
                     result({error:"not_found"},null);
                 }
