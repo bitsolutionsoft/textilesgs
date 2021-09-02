@@ -15,7 +15,7 @@ module.exports=app=>{
     app.post("/usuario/update",usuario.update);
     app.post("/usuario/delete/:id",usuario.delete);
     app.post("/usuario/login", usuario.findUser);
-    app.get("/usuario",usuario.getView);
+    app.get("/usuario/view",usuario.getView);
     app.get("/usuario/:id",usuario.findOne);
 
     app.post("/proveedor",proveedor.crud);
