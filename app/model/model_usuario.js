@@ -60,7 +60,7 @@ Usuario.findById=(id, result)=>{
 
     Usuario.getView=(result)=>{
         sql.query(
-            `call ingreso_usuario(${id},${0},"${null}","${null}","view");`,
+            `call ingreso_usuario(${0},${0},"${null}","${null}","view");`,
             (error,res)=>{
                 if (error){
                     console.log(error);
