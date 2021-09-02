@@ -24,7 +24,7 @@ exports.findOne=(req,res)=>{
         { res.send(data);}
     }); 
 }
-exports.getView=res=>{
+exports.getView=(req,res)=>{
  
     Empleado.getView((error,data) =>{
         if(error){  
