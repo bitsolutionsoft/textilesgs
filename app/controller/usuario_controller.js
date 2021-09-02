@@ -28,7 +28,7 @@ exports.findOne=(req,res)=>{
     }); 
 }
 
-exports.getView=(res)=>{
+exports.getView=res=>{
  
     Usuario.getView((error,data) =>{
         if(error){  
