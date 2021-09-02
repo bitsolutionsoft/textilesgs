@@ -5,12 +5,11 @@ const Usuario=function(usuario){
     this.idempleado=usuario.idempleado;
     this.usuario=usuario.usuario;
     this.pass=usuario.pass;
-    this.accion=usuario.accion;
 }
 
-Usuario.crud=(usuario,result)=>{
+Usuario.create=(usuario,result)=>{
 sql.query(
-    `call ingreso_usuario(${usuario.idusuario},${usuario.idempleado},"${usuario.usuario}","${usuario.pass}","${usuario.accion}");`,
+    `call ingreso_usuario(${usuario.idusuario},${usuario.idempleado},"${usuario.usuario}","${usuario.pass}","new");`,
     (error,res)=>{
         if(error){
             console.log("Hubo un error durante la operación", error.message);
@@ -24,29 +23,92 @@ sql.query(
     });
 }
 
-
-Usuario.getView=(usuario, result)=>{
+Usuario.udpate=(usuario,result)=>{
+    sql.query(
+        `call ingreso_usuario(${usuario.idusuario},${usuario.idempleado},"${usuario.usuario}","${usuario.pass}","update");`,
+        (error,res)=>{
+            if(error){
+                console.log("Hubo un error durante la operación", error.message);
+                result(error, null);
+                return;
+            }else{
+            console.log(res);
+            console.log("Usuario Ingresado",{mesage: "Success",res:res});
+            result(null,{message:"Success",res:res});
+            }
+        });
+    }
     
-    sql.query( 
-        `call ingreso_usuario(${usuario.idusuario},${usuario.idempleado},"${usuario.usuario}","${usuario.pass}","${usuario.accion}");`,
-        (error,res) =>{     
-     if(error){
-        console.log("Error: ", error);
-          result(error, null);
-         return;
-     }
+Usuario.findById=(id, result)=>{
+    sql.query(
+        `call ingreso_usuario(${id},${0},"${null}","${null}","viewone");`,
+        (error,res)=>{
+            if (error){
+                console.log(error);
+                result(error,null);
+                return
+            }
+            if(res[0].length){
+                console.log(res[0]);
+                result(null, {mesage:"Success",res:res[0]});
+            }else{
+                result({error:"not_found"},null);
+            }
+        }
+    );
+    }
 
-     if(res[0].length){
-         var resp={message:"Success",res:res[0]};
-         console.log(resp);
-         result(null, resp);
-         return;
-     }else{
- 
-    result({ error: "not_found" }, null);
-}
- });
-}
+    Usuario.getView=(result)=>{
+        sql.query(
+            `call ingreso_usuario(${id},${0},"${null}","${null}","view");`,
+            (error,res)=>{
+                if (error){
+                    console.log(error);
+                    result(error,null);
+                    return
+                }
+                if(res[0].length){
+                    console.log(res[0]);
+                    result(null, {mesage:"Success",res:res[0]});
+                }else{
+                    result({error:"not_found"},null);
+                }
+            }
+        );
+        }
+        Usuario.remove=(id,result)=>{
+            sql.query(
+                `call ingreso_usuario(${id},${0},"${null}","${null}","delete");`,
+            (error,res)=>{
+                if(error){
+                    console.log(error);
+                    result(null, {mesage:"Success",res:res[0]});
+                    return;
+                }else{
+                    result(null,{message:"Success",res:res});
+                }
+            }
+                );
+    
+        }
+        Usuario.findByUser=(usuario, result)=>{
+            sql.query(
+            `call ingreso_usuario(${usuario.idusuario},${usuario.idempleado},"${usuario.usuario}","${usuario.pass}","login");`,
+            (error,res)=>{
+                if (error){
+                    console.log(error);
+                    result(error,null);
+                    return
+                }
+                if(res[0].length){
+                    console.log(res[0]);
+                    result(null, {mesage:"Success",res:res[0]});
+                }else{
+                    result({error:"not_found"},null);
+                }
+            });
+        }
+
   module.exports=Usuario;
  
  

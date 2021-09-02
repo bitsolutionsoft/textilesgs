@@ -11,9 +11,9 @@ const Empleado=function(empleado){
     this.accion=empleado.accion;
 }
 
-Empleado.crud=(empleado,result)=>{
+Empleado.create=(empleado,result)=>{
 sql.query(
-    `call ingreso_empleado(${empleado.idempleado},"${empleado.nombre}","${empleado.apellido}","${empleado.dpi}",${empleado.telefono},"${empleado.correo}","${empleado.estado}","${empleado.accion}");`,
+    `call ingreso_empleado(${empleado.idempleado},"${empleado.nombre}","${empleado.apellido}","${empleado.dpi}",${empleado.telefono},"${empleado.correo}","${empleado.estado}","new");`,
     (error,res)=>{
         if(error){
             console.log("Hubo un error durante la operación", error.message);
@@ -26,85 +26,74 @@ sql.query(
         }
     });
 }
+Empleado.update=(empleado,result)=>{
+    sql.query(
+        `call ingreso_empleado(${empleado.idempleado},"${empleado.nombre}","${empleado.apellido}","${empleado.dpi}",${empleado.telefono},"${empleado.correo}","${empleado.estado}","update");`,
+        (error,res)=>{
+            if(error){
+                console.log("Hubo un error durante la operación", error.message);
+                result(error, null);
+                return;
+            }else{
+            console.log(res);
+            console.log("Empleado Ingresado",{mesage: "Success",res:res});
+            result(null,{message:"Success",res:res});
+            }
+        });
+    }
 
-
-Empleado.getView=(empleado, result)=>{
-    
-    sql.query( 
-        `call ingreso_empleado(${empleado.idempleado},"${empleado.nombre}","${empleado.apellido}","${empleado.dpi}",${empleado.telefono},"${empleado.correo}","${empleado.estado}","${empleado.accion}");`,
-        (error,res) =>{     
-     if(error){
-        console.log( error);
-          result(error, null);
-         return;
-     }
-
-     if(res[0].length){
-         var resp={message:"Success",res:res[0]};
-         console.log(resp);
-         result(null, resp);
-         return;
-     }else{
- 
-    result({ error: "not_found" }, null);
-}
- });
- }
-/*
- Empleado.getAll=(empleado,result)=>{
+Empleado.findById=(id, result)=>{
 sql.query(
-    `call ingreso_empleado(${empleado.idempleado},${empleado.nombre},${empleado.apellido},${empleado.dpi},${empleado.telefono},${empleado.correo},${empleado.estado},"view");`,
-    (error,response)=>{
-        if(error){
-            console.log("Error: ", error);
-              result(error, null);
-             return;
-         }
-         if(response[0].length){
-             var res=response[0];
-             var d1={message:"Success","res":response};
-             result(null, d1);
-             return;
-         }
-     
-        result({ message: "not_found" }, null);
-    });
- }
- 
- 
- 
- Empleado.updateByID=(empleado, result) => {
-     sql.query(
-        `call ingreso_empleado(${empleado.idempleado},${empleado.nombre},${empleado.apellido},${empleado.dpi},${empleado.telefono},${empleado.correo},${empleado.estado},"update");`,
-    (error, response)=>{
-     if(error){
-         console.log("error", error);
-         result(error, null);  
-         return;
-     }
- 
-     result(null,{id: res.insertId,...{message:"Success"}});
- }
- );
- };
- 
- 
- Empleado.remove = (empleado, result) => {
-    
-    sql.query( 
-        `call ingreso_empleado(${empleado.idempleado},${empleado.nombre},${empleado.apellido},${empleado.dpi},${empleado.telefono},${empleado.correo},${empleado.estado},"delete");`,
-    
-     (error,response) =>{
-         if(error){
-             console.log("error: ", error);
-             result(error, null);
-             return;
-         }
-  
-      result(null,{id: res.insertId,...{message:"Success"}});
-  
-     });
-  };*/
+    `call ingreso_empleado(${id},"${null}","${null}","${null}",${0},"${null}","${null}","viewone");`,
+    (error,res)=>{
+        if (error){
+            console.log(error);
+            result(error,null);
+            return
+        }
+        if(res[0].length){
+            console.log(res[0]);
+            result(null, {mesage:"Success",res:res[0]});
+        }else{
+            result({error:"not_found"},null);
+        }
+    }
+);
+}
+
+Empleado.getView=(result)=>{
+    sql.query(
+        `call ingreso_empleado(${0},"${null}","${null}","${null}",${0},"${null}","${null}","view");`,
+        (error,res)=>{
+            if (error){
+                console.log(error);
+                result(error,null);
+                return
+            }
+            if(res[0].length){
+                console.log(res[0]);
+                result(null, {mesage:"Success",res:res[0]});
+            }else{
+                result({error:"not_found"},null);
+            }
+        }
+    );
+    }
+    Empleado.remove=(id,result)=>{
+        sql.query(
+            `call ingreso_empleado(${id},"${null}","${null}","${null}",${0},"${null}","${null}","delete");`,
+        (error,res)=>{
+            if(error){
+                console.log(error);
+                result(null, {mesage:"Success",res:res[0]});
+                return;
+            }else{
+                result(null,{message:"Success",res:res});
+            }
+        }
+            );
+
+    }
   module.exports=Empleado;
  
  
