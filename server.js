@@ -20,8 +20,9 @@ app.get("/",(req, res)=>{
     res.json({message:"Bienvenido a centro comercial y textiles gs"});
 })
 require ("./app/router/router")(app);
-
-app.listen(8080,()=>{
+/** 8080 para clevercloud */
+/** 3000 local */
+app.listen(3000,()=>{
 console.log("servidor en ejecución");
 });
 
