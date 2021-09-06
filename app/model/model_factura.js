@@ -1,16 +1,20 @@
 
 const sql=require("../config/db.js");
 
-const Proveedor=function(proveedor){
-    this.idproveedor=proveedor.idproveedor;
-    this.nombre=proveedor.nombre;
+const Factura=function(factura){
+    this.idfactura  =factura.idfactura;
+    this.idcliente  =factura.idcliente;
+    this.idempleado =factura.idempleado;
+    this.fecha      =factura.fecha;
+    this.total      =factura.total;
+    this.estado     =factura.estado;
     
 }
  
 
-  Proveedor.create=(proveedor,result)=>{
+Factura.create=(factura,result)=>{
     sql.query(
-      `call ingreso_proveedor(${proveedor.idproveedor},"${proveedor.nombre}","new");`,
+      `call ingreso_factura(${factura.idfactura},${factura.idcliente},${factura.idempleado},"${factura.fecha}",${factura.total},"${detalle.estado}","new");`,
         (error,res)=>{
             if(error){
                 console.log("Hubo un error durante la operación", error.message);
@@ -23,9 +27,9 @@ const Proveedor=function(proveedor){
             }
         });
     }
-    Proveedor.update=(proveedor,result)=>{
+    Factura.update=(factura,result)=>{
         sql.query(
-            `call ingreso_proveedor(${proveedor.idproveedor},"${proveedor.nombre}","update");`,
+            `call ingreso_factura(${factura.idfactura},${factura.idcliente},${factura.idempleado},"${factura.fecha}",${factura.total},"${detalle.estado}","update");`,
             (error,res)=>{
                 if(error){
                     console.log("Hubo un error durante la operación", error.message);
@@ -39,9 +43,9 @@ const Proveedor=function(proveedor){
             });
         }
         
-    Proveedor.findById=(id, result)=>{
+        Factura.findById=(id, result)=>{
         sql.query(
-            `call ingreso_proveedor(${id},"${null}","viewone");`,
+            `call ingreso_factura(${id},${0},${0},"${null}",${0},"${null}","viewone");`,
             (error,res)=>{
                 if (error){
                     console.log(error);
@@ -58,9 +62,9 @@ const Proveedor=function(proveedor){
         );
         }
     
-        Proveedor.getView=(result)=>{
+        Factura.getView=(result)=>{
             sql.query(
-                `call ingreso_proveedor(${0},"${null}","view");`,
+                `call ingreso_factura(${0},${0},${0},"${null}",${0},"${null}","view");`,
                 (error,res)=>{
                     if (error){
                         console.log(error);
@@ -76,10 +80,10 @@ const Proveedor=function(proveedor){
                 }
             );
             }
-            Proveedor.remove=(id,result)=>{
+            Factura.remove=(id,result)=>{
                 sql.query(
-                    `call ingreso_proveedor(${id},"${null}","delete");`,
-                (error,res)=>{
+                    `call ingreso_factura(${id},${0},${0},"${null}",${0},"${null}","delete");`,
+                    (error,res)=>{
                     if(error){
                         console.log(error);
                         result(null, {message:"Success",res:res[0]});
@@ -91,7 +95,7 @@ const Proveedor=function(proveedor){
                     );
         
             }
-  module.exports=Proveedor;
+  module.exports=Factura;
  
  
  

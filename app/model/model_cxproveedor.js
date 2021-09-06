@@ -1,16 +1,21 @@
 
 const sql=require("../config/db.js");
 
-const Proveedor=function(proveedor){
-    this.idproveedor=proveedor.idproveedor;
-    this.nombre=proveedor.nombre;
+const Cxproveedor=function(cxproveedor){
+this.idcuenta =cxproveedor.idcuenta;
+this.idproveedor =cxproveedor.idproveedor;
+this.total =cxproveedor.total;
+this.totalabono=cxproveedor.totalabono;
+this.saldo =cxproveedor.saldo;
+this.estado =cxproveedor.estado;
+
     
 }
  
 
-  Proveedor.create=(proveedor,result)=>{
+Cxproveedor.create=(cxproveedor,result)=>{
     sql.query(
-      `call ingreso_proveedor(${proveedor.idproveedor},"${proveedor.nombre}","new");`,
+      `call ingreso_cuentaxproveedor(${cxproveedor.idcuenta},${cxproveedor.idproveedor},${cxproveedor.total},${cxproveedor.totalabono},${cxproveedor.saldo},"${cxproveedor.estado}","new");`,
         (error,res)=>{
             if(error){
                 console.log("Hubo un error durante la operación", error.message);
@@ -23,9 +28,9 @@ const Proveedor=function(proveedor){
             }
         });
     }
-    Proveedor.update=(proveedor,result)=>{
+    Cxproveedor.update=(cxproveedor,result)=>{
         sql.query(
-            `call ingreso_proveedor(${proveedor.idproveedor},"${proveedor.nombre}","update");`,
+            `call ingreso_cuentaxproveedor(${cxproveedor.idcuenta},${cxproveedor.idproveedor},${cxproveedor.total},${cxproveedor.totalabono},${cxproveedor.saldo},"${cxproveedor.estado}","update");`,
             (error,res)=>{
                 if(error){
                     console.log("Hubo un error durante la operación", error.message);
@@ -39,9 +44,9 @@ const Proveedor=function(proveedor){
             });
         }
         
-    Proveedor.findById=(id, result)=>{
+        Cxproveedor.findById=(id, result)=>{
         sql.query(
-            `call ingreso_proveedor(${id},"${null}","viewone");`,
+            `call ingreso_cuentaxproveedor(${id},${0},${0},${0},${0},"${cull}","viewone");`,
             (error,res)=>{
                 if (error){
                     console.log(error);
@@ -58,9 +63,9 @@ const Proveedor=function(proveedor){
         );
         }
     
-        Proveedor.getView=(result)=>{
+        Cxproveedor.getView=(result)=>{
             sql.query(
-                `call ingreso_proveedor(${0},"${null}","view");`,
+                `call ingreso_cuentaxproveedor(${0},${0},${0},${0},${0},"${cull}","view");`,
                 (error,res)=>{
                     if (error){
                         console.log(error);
@@ -76,10 +81,10 @@ const Proveedor=function(proveedor){
                 }
             );
             }
-            Proveedor.remove=(id,result)=>{
+            Cxproveedor.remove=(id,result)=>{
                 sql.query(
-                    `call ingreso_proveedor(${id},"${null}","delete");`,
-                (error,res)=>{
+                    `call ingreso_cuentaxproveedor(${id},${0},${0},${0},${0},"${cull}","delete");`,
+                    (error,res)=>{
                     if(error){
                         console.log(error);
                         result(null, {message:"Success",res:res[0]});
@@ -91,7 +96,7 @@ const Proveedor=function(proveedor){
                     );
         
             }
-  module.exports=Proveedor;
+  module.exports=Cxproveedor;
  
  
  

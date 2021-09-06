@@ -1,19 +1,23 @@
 
 const sql=require("../config/db.js");
 
-const Proveedor=function(proveedor){
-    this.idproveedor=proveedor.idproveedor;
-    this.nombre=proveedor.nombre;
+const Cliente=function(cliente){
+    this.idcliente=cliente.idcliente;
+    this.nombre =cliente.nombre;
+    this.apellido =cliente.apellido;
+    this.direccion=cliente.direccion;
+    this.telefono =cliente.telefono;
+    this.correo =cliente.correo;
     
 }
  
 
-  Proveedor.create=(proveedor,result)=>{
+  Cliente.create=(cliente,result)=>{
     sql.query(
-      `call ingreso_proveedor(${proveedor.idproveedor},"${proveedor.nombre}","new");`,
+      `call ingreso_cliente(${cliente.idcliente},"${cliente.nombre}","${cliente.apellido}","${cliente.direccion}",${cliente.telefono},"${cliente.correo}","new");`,
         (error,res)=>{
             if(error){
-                console.log("Hubo un error durante la operación", error.message);
+                console.log("Hubo un error durante la cliente", error.message);
                 result(error, null);
                 return;
             }else{
@@ -23,12 +27,12 @@ const Proveedor=function(proveedor){
             }
         });
     }
-    Proveedor.update=(proveedor,result)=>{
+    Cliente.update=(cliente,result)=>{
         sql.query(
-            `call ingreso_proveedor(${proveedor.idproveedor},"${proveedor.nombre}","update");`,
+            `call ingreso_cliente(${cliente.idcliente},"${cliente.nombre}","${cliente.apellido}","${cliente.direccion}",${cliente.telefono},"${cliente.correo}","update");`,
             (error,res)=>{
                 if(error){
-                    console.log("Hubo un error durante la operación", error.message);
+                    console.log("Hubo un error durante la cliente", error.message);
                     result(error, null);
                     return;
                 }else{
@@ -39,9 +43,9 @@ const Proveedor=function(proveedor){
             });
         }
         
-    Proveedor.findById=(id, result)=>{
+        Cliente.findById=(id, result)=>{
         sql.query(
-            `call ingreso_proveedor(${id},"${null}","viewone");`,
+            `call ingreso_cliente(${id},"${null}","${null}","${null}",${0},"${null}","viewone");`,
             (error,res)=>{
                 if (error){
                     console.log(error);
@@ -58,9 +62,9 @@ const Proveedor=function(proveedor){
         );
         }
     
-        Proveedor.getView=(result)=>{
+        Cliente.getView=(result)=>{
             sql.query(
-                `call ingreso_proveedor(${0},"${null}","view");`,
+                `call ingreso_cliente(${0},"${null}","${null}","${null}",${0},"${null}","view");`,
                 (error,res)=>{
                     if (error){
                         console.log(error);
@@ -76,9 +80,9 @@ const Proveedor=function(proveedor){
                 }
             );
             }
-            Proveedor.remove=(id,result)=>{
+            Cliente.remove=(id,result)=>{
                 sql.query(
-                    `call ingreso_proveedor(${id},"${null}","delete");`,
+                    `call ingreso_cliente(${id},"${null}","${null}","${null}",${0},"${null}","delete");`,
                 (error,res)=>{
                     if(error){
                         console.log(error);
@@ -91,7 +95,7 @@ const Proveedor=function(proveedor){
                     );
         
             }
-  module.exports=Proveedor;
+  module.exports=Cliente;
  
  
  

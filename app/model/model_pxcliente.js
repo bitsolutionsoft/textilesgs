@@ -1,16 +1,19 @@
 
 const sql=require("../config/db.js");
 
-const Proveedor=function(proveedor){
-    this.idproveedor=proveedor.idproveedor;
-    this.nombre=proveedor.nombre;
+const Pxcliente=function(pxcliente){
+    this.idprecio   =pxcliente.idprecio;
+    this.idproducto =pxcliente.idproducto;
+    this.idcliente  =pxcliente.idcliente;
+    this.preciorollo=pxcliente.preciorollo;
+    this.precioyarda=pxcliente.precioyarda;
     
 }
  
 
-  Proveedor.create=(proveedor,result)=>{
+Pxcliente.create=(pxcliente,result)=>{
     sql.query(
-      `call ingreso_proveedor(${proveedor.idproveedor},"${proveedor.nombre}","new");`,
+      `call ingreso_precioxcliente(${pxcliente.idprecio},${pxcliente.idproducto},${pxcliente.idcliente},${pxcliente.preciorollo},${pxcliente.precioyarda},"new");`,
         (error,res)=>{
             if(error){
                 console.log("Hubo un error durante la operación", error.message);
@@ -23,9 +26,9 @@ const Proveedor=function(proveedor){
             }
         });
     }
-    Proveedor.update=(proveedor,result)=>{
+    Pxcliente.update=(pxcliente,result)=>{
         sql.query(
-            `call ingreso_proveedor(${proveedor.idproveedor},"${proveedor.nombre}","update");`,
+            `call ingreso_precioxcliente(${pxcliente.idprecio},${pxcliente.idproducto},${pxcliente.idcliente},${pxcliente.preciorollo},${pxcliente.precioyarda},"update");`,
             (error,res)=>{
                 if(error){
                     console.log("Hubo un error durante la operación", error.message);
@@ -39,9 +42,9 @@ const Proveedor=function(proveedor){
             });
         }
         
-    Proveedor.findById=(id, result)=>{
+        Pxcliente.findById=(id, result)=>{
         sql.query(
-            `call ingreso_proveedor(${id},"${null}","viewone");`,
+            `call ingreso_precioxcliente(${id},${0},${0},${0},${0},"viewone");`,
             (error,res)=>{
                 if (error){
                     console.log(error);
@@ -57,10 +60,9 @@ const Proveedor=function(proveedor){
             }
         );
         }
-    
-        Proveedor.getView=(result)=>{
+        Pxcliente.findByC=(id, result)=>{
             sql.query(
-                `call ingreso_proveedor(${0},"${null}","view");`,
+                `call ingreso_precioxcliente(${0},${0},${id},${0},${0},"viewall");`,
                 (error,res)=>{
                     if (error){
                         console.log(error);
@@ -76,10 +78,29 @@ const Proveedor=function(proveedor){
                 }
             );
             }
-            Proveedor.remove=(id,result)=>{
-                sql.query(
-                    `call ingreso_proveedor(${id},"${null}","delete");`,
+    
+        Pxcliente.getView=(result)=>{
+            sql.query(
+                `call ingreso_precioxcliente(${0},${0},${0},${0},${0},"view");`,
                 (error,res)=>{
+                    if (error){
+                        console.log(error);
+                        result(error,null);
+                        return
+                    }
+                    if(res[0].length){
+                        console.log(res[0]);
+                        result(null, {message:"Success",res:res[0]});
+                    }else{
+                        result({error:"not_found"},null);
+                    }
+                }
+            );
+            }
+            Pxcliente.remove=(id,result)=>{
+                sql.query(
+                    `call ingreso_precioxcliente(${id},${0},${0},${0},${0},"delete");`,
+                    (error,res)=>{
                     if(error){
                         console.log(error);
                         result(null, {message:"Success",res:res[0]});
@@ -91,7 +112,7 @@ const Proveedor=function(proveedor){
                     );
         
             }
-  module.exports=Proveedor;
+  module.exports=Pxcliente;
  
  
  

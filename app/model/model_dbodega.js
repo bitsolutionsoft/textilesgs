@@ -1,16 +1,18 @@
 
 const sql=require("../config/db.js");
 
-const Proveedor=function(proveedor){
-    this.idproveedor=proveedor.idproveedor;
-    this.nombre=proveedor.nombre;
-    
+const Dbodega=function(dbodega){
+    this.iddespacho=dbodega.iddespacho;
+    this.idfactura =dbodega.idfactura;
+    this.idproducto=dbodega.idproducto;
+    this.descripcion=dbodega.descripcion;
+    this.cantidad =dbodega.cantidad;
 }
  
 
-  Proveedor.create=(proveedor,result)=>{
+Dbodega.create=(dbodega,result)=>{
     sql.query(
-      `call ingreso_proveedor(${proveedor.idproveedor},"${proveedor.nombre}","new");`,
+      `call ingreso_despachobodega(${dbodega.iddespacho},${dbodega.idfactura},${dbodega.idproducto},"${dbodega.descripcion}",${dbodega.cantidad},"new");`,
         (error,res)=>{
             if(error){
                 console.log("Hubo un error durante la operación", error.message);
@@ -23,9 +25,9 @@ const Proveedor=function(proveedor){
             }
         });
     }
-    Proveedor.update=(proveedor,result)=>{
+    Dbodega.update=(dbodega,result)=>{
         sql.query(
-            `call ingreso_proveedor(${proveedor.idproveedor},"${proveedor.nombre}","update");`,
+            `call ingreso_despachobodega(${dbodega.iddespacho},${dbodega.idfactura},${dbodega.idproducto},"${dbodega.descripcion}",${dbodega.cantidad},"update");`,
             (error,res)=>{
                 if(error){
                     console.log("Hubo un error durante la operación", error.message);
@@ -39,9 +41,9 @@ const Proveedor=function(proveedor){
             });
         }
         
-    Proveedor.findById=(id, result)=>{
+        Dbodega.findById=(id, result)=>{
         sql.query(
-            `call ingreso_proveedor(${id},"${null}","viewone");`,
+            `call ingreso_despachobodega(${id},${0},${0},"${null}",${0},"viewone");`,
             (error,res)=>{
                 if (error){
                     console.log(error);
@@ -58,9 +60,9 @@ const Proveedor=function(proveedor){
         );
         }
     
-        Proveedor.getView=(result)=>{
+        Dbodega.getView=(result)=>{
             sql.query(
-                `call ingreso_proveedor(${0},"${null}","view");`,
+                `call ingreso_despachobodega(${0},${0},${0},"${null}",${0},"view");`,
                 (error,res)=>{
                     if (error){
                         console.log(error);
@@ -76,9 +78,9 @@ const Proveedor=function(proveedor){
                 }
             );
             }
-            Proveedor.remove=(id,result)=>{
+            Dbodega.remove=(id,result)=>{
                 sql.query(
-                    `call ingreso_proveedor(${id},"${null}","delete");`,
+                    `call ingreso_despachobodega(${id},${0},${0},"${null}",${0},"delete");`,
                 (error,res)=>{
                     if(error){
                         console.log(error);
@@ -91,7 +93,7 @@ const Proveedor=function(proveedor){
                     );
         
             }
-  module.exports=Proveedor;
+  module.exports=Dbodega;
  
  
  
