@@ -22,7 +22,7 @@ app.get("/",(req, res)=>{
 require ("./app/router/router")(app);
 /** 8080 para clevercloud */
 /** 3000 local */
-app.listen(3000,()=>{
+app.listen(8080,()=>{
 console.log("servidor en ejecución");
 });
 
