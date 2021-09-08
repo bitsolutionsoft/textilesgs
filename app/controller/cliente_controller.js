@@ -17,9 +17,9 @@ exports.findOne=(req,res)=>{
     Cliente.findById(req.params.id,(error,data)=>{
         if(error){  
             if(error.kind === "not_found"){
-                res.status(404).send({message:"No se encrontro el proveedor ",...error});
+                res.status(404).send({message:"No se encrontro el cliente ",...error});
             }else{
-                res.status(500).send({message: "Error al consultar el proveedor ",...error});
+                res.status(500).send({message: "Error al consultar el cliente ",...error});
             }
         }else
         { res.send(data);}
@@ -31,9 +31,9 @@ exports.getView=(req,res)=>{
     Cliente.getView((error,data) =>{
         if(error){  
             if(error.kind === "not_found"){
-                res.status(404).send({message:"No se encrontro el proveedor ",...error});
+                res.status(404).send({message:"No se encrontro el cliente ",...error});
             }else{
-                res.status(500).send({message: "Error al consultar el proveedor ",...error});
+                res.status(500).send({message: "Error al consultar el cliente ",...error});
             }
         }else
         { res.send(data);}
@@ -43,9 +43,9 @@ exports.delete=(req,res)=>{
     Cliente.remove(req.params.id,(error,data)=>{
         if(error){  
             if(error.kind === "not_found"){
-                res.status(404).send({message:"No se encrontro el proveedor ",...error});
+                res.status(404).send({message:"No se encrontro el cliente ",...error});
             }else{
-                res.status(500).send({message: "Error al consultar el proveedor ",...error});
+                res.status(500).send({message: "Error al consultar el cliente ",...error});
             }
         }else
         { res.send(data);}
@@ -62,9 +62,9 @@ exports.update =(req, res) =>{
         (error, data) => {
             if(error){  
                 if(error.kind === "not_found"){
-                    res.status(404).send({message:"No se encrontro el proveedor ",...error});
+                    res.status(404).send({message:"No se encrontro el cliente ",...error});
                 }else{
-                    res.status(500).send({message: "Error al consultar el proveedor ",...error});
+                    res.status(500).send({message: "Error al consultar el cliente ",...error});
                 }
             }else
             { res.send(data);}

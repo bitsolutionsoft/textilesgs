@@ -9,7 +9,7 @@ const Producto=function(producto){
     this.color = producto.color;
     this.cant_rollo = producto.cant_rollo;
     this.cant_yarda = producto.cant_yarda;
-    this.precio_compra_r = Producto.precio_compra_r;
+    this.precio_compra_r = producto.precio_compra_r;
     this.precio_compra_y =producto.precio_compra_y;
     this.ubicacion =producto.ubicacion;
     
