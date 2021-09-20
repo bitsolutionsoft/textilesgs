@@ -8,7 +8,7 @@ const Empleado=function(empleado){
     this.telefono=empleado.telefono;
     this.correo=empleado.correo;
     this.estado=empleado.estado;
-    this.accion=empleado.accion;
+    
 }
 
 Empleado.create=(empleado,result)=>{

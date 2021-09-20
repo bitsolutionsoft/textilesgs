@@ -1,4 +1,5 @@
 const Usuario = require("../model/model_usuario");
+const jwt =require("jsonwebtoken");
 
 
 
@@ -24,6 +25,7 @@ exports.findOne=(req,res)=>{
                 res.status(500).send({message: "Error al consultar el usuario ",...error});
             }
         }else
+
         { res.send(data);}
     }); 
 }
@@ -84,6 +86,19 @@ exports.findUser=(req, res) =>{
                     res.status(500).send({message: "Error al consultar el usuario ",...error});
                 }
             }else
-            { res.send(data);}
+            { 
+                const user={
+                    id:0,
+                    nombre:'distribuidora_gs',
+                    cdd:"5689"
+                }
+                jwt.sign({user}, 'secretKey',(error, token) =>{
+                    //console.log(token)
+                     //res.json({message:"Bienvenido a centro comercial y textiles gs",token:token});
+                     data.res[0].token=token
+                      res.send(data);
+                })
+                
+               }
      });
  };

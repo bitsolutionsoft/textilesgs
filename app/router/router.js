@@ -12,89 +12,91 @@ module.exports=app=>{
     const permiso=require("../controller/permiso_controller");
     const precio=require("../controller/precio_controller");
     const pxcliente=require("../controller/pxcliente_controller");
+    const verifyToken =require("../middleware/verifyToken");
+
     
-    app.post("/empleado",empleado.create);
-    app.post("/empleado/update",empleado.update);
-    app.post("/empleado/delete/:id",empleado.delete)
-    app.get("/empleado/view",empleado.getView);
-    app.get("/empleado/:id",empleado.findOne);
+    app.post("/empleado",verifyToken,empleado.create);
+    app.post("/empleado/update",verifyToken,empleado.update)
+    app.get("/empleado/view",verifyToken,empleado.getView);
+    app.get("/empleado/:id",verifyToken,empleado.findOne);
+    app.post("/empleado/delete/:id",verifyToken,empleado.delete);
   
 
-    app.post("/usuario",usuario.create);
-    app.post("/usuario/update",usuario.update);
-    app.post("/usuario/delete/:id",usuario.delete);
+    app.post("/usuario",verifyToken,usuario.create);
+    app.post("/usuario/update",verifyToken,usuario.update);
+    app.post("/usuario/delete/:id",verifyToken,usuario.delete);
     app.post("/usuario/login", usuario.findUser);
-    app.get("/usuario/view",usuario.getView);
-    app.get("/usuario/:id",usuario.findOne);
+    app.get("/usuario/view",verifyToken,usuario.getView);
+    app.get("/usuario/:id",verifyToken,usuario.findOne);
 
-    app.post("/proveedor",proveedor.create);
-    app.post("/proveedor/update",proveedor.update);
-    app.post("/proveedor/delete/:id",proveedor.delete)
-    app.get("/proveedor/view",proveedor.getView);
-    app.get("/proveedor/:id",proveedor.findOne);
+    app.post("/proveedor",verifyToken,proveedor.create);
+    app.post("/proveedor/update",verifyToken,proveedor.update);
+    app.post("/proveedor/delete/:id",verifyToken,proveedor.delete)
+    app.get("/proveedor/view",verifyToken,proveedor.getView);
+    app.get("/proveedor/:id",verifyToken,proveedor.findOne);
     
-    app.post("/abono",abono.create);
-    app.post("/abono/update",abono.update);
-    app.post("/abono/delete/:id",abono.delete)
-    app.get("/abono/view",abono.getView);
-    app.get("/abono/:id",abono.findOne);
+    app.post("/abono",verifyToken,abono.create);
+    app.post("/abono/update",verifyToken,abono.update);
+    app.post("/abono/delete/:id",verifyToken,abono.delete)
+    app.get("/abono/view",verifyToken,abono.getView);
+    app.get("/abono/:id",verifyToken,abono.findOne);
 
-    app.post("/producto",producto.create);
-    app.post("/producto/update",producto.update);
-    app.post("/producto/delete/:id",producto.delete)
-    app.get("/producto/view",producto.getView);
-    app.get("/producto/:id",producto.findOne);
+    app.post("/producto",verifyToken,producto.create);
+    app.post("/producto/update",verifyToken,producto.update);
+    app.post("/producto/delete/:id",verifyToken,producto.delete)
+    app.get("/producto/view",verifyToken,producto.getView);
+    app.get("/producto/:id",verifyToken,producto.findOne);
 
-    app.post("/cliente",cliente.create);
-    app.post("/cliente/update",cliente.update);
-    app.post("/cliente/delete/:id",cliente.delete)
-    app.get("/cliente/view",cliente.getView);
-    app.get("/cliente/:id",cliente.findOne);
+    app.post("/cliente",verifyToken,cliente.create);
+    app.post("/cliente/update",verifyToken,cliente.update);
+    app.post("/cliente/delete/:id",verifyToken,cliente.delete)
+    app.get("/cliente/view",verifyToken,cliente.getView);
+    app.get("/cliente/:id",verifyToken,cliente.findOne);
 
-    app.post("/cxproveedor",cxproveedor.create);
-    app.post("/cxproveedor/update",cxproveedor.update);
-    app.post("/cxproveedor/delete/:id",cxproveedor.delete)
-    app.get("/cxproveedor/view",cxproveedor.getView);
-    app.get("/cxproveedor/:id",cxproveedor.findOne);
+    app.post("/cxproveedor",verifyToken,cxproveedor.create);
+    app.post("/cxproveedor/update",verifyToken,cxproveedor.update);
+    app.post("/cxproveedor/delete/:id",verifyToken,cxproveedor.delete)
+    app.get("/cxproveedor/view",verifyToken,cxproveedor.getView);
+    app.get("/cxproveedor/:id",verifyToken,cxproveedor.findOne);
 
-    app.post("/dbodega",dbodega.create);
-    app.post("/dbodega/update",dbodega.update);
-    app.post("/dbodega/delete/:id",dbodega.delete)
-    app.get("/dbodega/view",dbodega.getView);
-    app.get("/dbodega/:id",dbodega.findOne);
+    app.post("/dbodega",verifyToken,dbodega.create);
+    app.post("/dbodega/update",verifyToken,dbodega.update);
+    app.post("/dbodega/delete/:id",verifyToken,dbodega.delete)
+    app.get("/dbodega/view",verifyToken,dbodega.getView);
+    app.get("/dbodega/:id",verifyToken,dbodega.findOne);
 
-    app.post("/detalle",detalle.create);
-    app.post("/detalle/update",detalle.update);
-    app.post("/detalle/delete/:id",detalle.delete)
-    app.get("/detalle/view",detalle.getView);
-    app.get("/detalle/:id",detalle.findOne);
+    app.post("/detalle",verifyToken,detalle.create);
+    app.post("/detalle/update",verifyToken,detalle.update);
+    app.post("/detalle/delete/:id",verifyToken,detalle.delete)
+    app.get("/detalle/view",verifyToken,detalle.getView);
+    app.get("/detalle/:id",verifyToken,detalle.findOne);
 
-    app.post("/factura",factura.create);
-    app.post("/factura/update",factura.update);
-    app.post("/factura/delete/:id",factura.delete)
-    app.get("/factura/view",factura.getView);
-    app.get("/factura/:id",factura.findOne);
+    app.post("/factura",verifyToken,factura.create);
+    app.post("/factura/update",verifyToken,factura.update);
+    app.post("/factura/delete/:id",verifyToken,factura.delete)
+    app.get("/factura/view",verifyToken,factura.getView);
+    app.get("/factura/:id",verifyToken,factura.findOne);
 
-    app.post("/permiso",permiso.create);
-    app.post("/permiso/update",permiso.update);
-    app.post("/permiso/delete/:id",permiso.delete)
-    app.get("/permiso/view",permiso.getView);
-    app.get("/permiso/:id",permiso.findOne);
-    app.get("/permiso/emp/:id",permiso.findEmp);
+    app.post("/permiso",verifyToken,permiso.create);
+    app.post("/permiso/update",verifyToken,permiso.update);
+    app.post("/permiso/delete/:id",verifyToken,permiso.delete)
+    app.get("/permiso/view",verifyToken,permiso.getView);
+    app.get("/permiso/:id",verifyToken,permiso.findOne);
+    app.get("/permiso/emp/:id",verifyToken,permiso.findEmp);
 
-    app.post("/precio",precio.create);
-    app.post("/precio/update",precio.update);
-    app.post("/precio/delete/:id",precio.delete)
-    app.get("/perpreciomiso/view",precio.getView);
-    app.get("/precio/:id",precio.findOne);
-    app.get("/precio/allpro/:id",precio.findAllPro);
-    app.get("/precio/bypro/:id",precio.findOnePro);
+    app.post("/precio",verifyToken,precio.create);
+    app.post("/precio/update",verifyToken,precio.update);
+    app.post("/precio/delete/:id",verifyToken,precio.delete)
+    app.get("/perpreciomiso/view",verifyToken,precio.getView);
+    app.get("/precio/:id",verifyToken,precio.findOne);
+    app.get("/precio/allpro/:id",verifyToken,precio.findAllPro);
+    app.get("/precio/bypro/:id",verifyToken,precio.findOnePro);
 
-    app.post("/pxcliente",pxcliente.create);
-    app.post("/pxcliente/update",pxcliente.update);
-    app.post("/pxcliente/delete/:id",pxcliente.delete)
-    app.get("/pxcliente/view",pxcliente.getView);
-    app.get("/pxcliente/:id",pxcliente.findOne);
-    app.get("/pxcliente/bycl/:id",pxcliente.findC);
+    app.post("/pxcliente",verifyToken,pxcliente.create);
+    app.post("/pxcliente/update",verifyToken,pxcliente.update);
+    app.post("/pxcliente/delete/:id",verifyToken,pxcliente.delete)
+    app.get("/pxcliente/view",verifyToken,pxcliente.getView);
+    app.get("/pxcliente/:id",verifyToken,pxcliente.findOne);
+    app.get("/pxcliente/bycl/:id",verifyToken,pxcliente.findC);
    
 };
