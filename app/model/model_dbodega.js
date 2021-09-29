@@ -2,11 +2,11 @@
 const sql=require("../config/db.js");
 
 const Dbodega=function(dbodega){
-    this.iddespacho=dbodega.iddespacho;
-    this.idfactura =dbodega.idfactura;
-    this.idproducto=dbodega.idproducto;
-    this.descripcion=dbodega.descripcion;
-    this.cantidad =dbodega.cantidad;
+    this.iddespacho     =dbodega.iddespacho;
+    this.idfactura      =dbodega.idfactura;
+    this.idproducto     =dbodega.idproducto;
+    this.descripcion    =dbodega.descripcion;
+    this.cantidad       =dbodega.cantidad;
 }
  
 

@@ -6,6 +6,7 @@ const socketIO= require("socket.io");
 
 const app=express();
 //app.use(cors());
+
 app.use((req,res,next) =>{
    res.header('Access-Control-Allow-Origin','*');
     res.header('Access-Cotrol-Allow-Headers','Content-Type, Origin, X-Requested-With, Accept');
@@ -38,15 +39,16 @@ app.get("/",(req, res)=>{
 require("./app/router/router")(app)
 
 /** 8080 para clevercloud */
-/** 3000 local */
-const server=app.listen(8080,()=>{
+/** 3001 local */
+const server=app.listen(3001,()=>{
 console.log("servidor en ejecución");
 });
 
 //websocket
 const io=socketIO(server)
 
-io.on('Connection',()=>{
-console.log("nueva conexion");
+io.on('connection',()=>{
+console.log("nueva conexion " );
+io.emit('announcements', { message: 'Nueva medida para vender' });
 })
 
