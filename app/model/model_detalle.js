@@ -2,13 +2,13 @@
 const sql=require("../config/db.js");
 
 const Detalle=function(detalle){
-    this.iddetalle =detalle.iddetalle;
-    this.idfactura =detalle.idfactura;
-    this.idproducto=detalle.idproducto;
+    this.iddetalle  =detalle.iddetalle;
+    this.idfactura  =detalle.idfactura;
+    this.idproducto =detalle.idproducto;
     this.descripcion=detalle.descripcion;
-    this.cantidad  =detalle.cantidad;
-    this.precio    =detalle.precio;
-    this.total     =detalle.total;
+    this.cantidad   =detalle.cantidad;
+    this.precio     =detalle.precio;
+    this.total      =detalle.total;
     
 }
  

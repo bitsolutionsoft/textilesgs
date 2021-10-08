@@ -51,6 +51,19 @@ exports.delete=(req,res)=>{
     });
 }
 
+exports.getViewVenta=(req,res)=>{     
+    Producto.getViewVenta((error,data)=>{
+        if(error){  
+            if(error.kind === "not_found"){
+                res.status(404).send({message:"No se encrontro el producto ",...error});
+            }else{
+                res.status(500).send({message: "Error al consultar el producto ",...error});
+            }
+        }else
+        { res.send(data);}
+    });
+}
+
 exports.update =(req, res) =>{
     if(!req.body){
         res.status(400).send({msg: "El contenido no puede estar vacio", error:"Llenos los campos antes enviar"});

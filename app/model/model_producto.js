@@ -8,9 +8,9 @@ const Producto=function(producto){
     this.estilo =producto.estilo;
     this.color = producto.color;
     this.cant_rollo = producto.cant_rollo;
+    this.yardaporrollo =producto.yardaporrollo;
     this.cant_yarda = producto.cant_yarda;
-    this.precio_compra_r = producto.precio_compra_r;
-    this.precio_compra_y =producto.precio_compra_y;
+    this.precio_compra = producto.precio_compra;
     this.ubicacion =producto.ubicacion;
     
 }
@@ -18,7 +18,7 @@ const Producto=function(producto){
 
 Producto.create=(producto,result)=>{
     sql.query(
-      `call ingreso_producto(${producto.idproducto},${producto.idproveedor},"${producto.nombre}","${producto.estilo}","${producto.color}",${producto.cant_rollo},${producto.cant_yarda},${producto.precio_compra_r},${producto.precio_compra_y},"${producto.ubicacion}","new");`,
+      `call ingreso_producto(${producto.idproducto},${producto.idproveedor},"${producto.nombre}","${producto.estilo}","${producto.color}",${producto.cant_rollo},${producto.yardaporrollo},${producto.cant_yarda},${producto.precio_compra},"${producto.ubicacion}","new");`,
         (error,res)=>{
             if(error){
                 console.log("Hubo un error durante la operación", error.message);
@@ -33,7 +33,7 @@ Producto.create=(producto,result)=>{
     }
     Producto.update=(producto,result)=>{
         sql.query(
-            `call ingreso_producto(${producto.idproducto},${producto.idproveedor},"${producto.nombre}","${producto.estilo}","${producto.color}",${producto.cant_rollo},${producto.cant_yarda},${producto.precio_compra_r},${producto.precio_compra_y},"${producto.ubicacion}","update");`,
+            `call ingreso_producto(${producto.idproducto},${producto.idproveedor},"${producto.nombre}","${producto.estilo}","${producto.color}",${producto.cant_rollo},${producto.yardaporrollo},${producto.cant_yarda},${producto.precio_compra},"${producto.ubicacion}","update");`,
             (error,res)=>{
                 if(error){
                     console.log("Hubo un error durante la operación", error.message);
@@ -84,6 +84,22 @@ Producto.create=(producto,result)=>{
                 }
             );
             }
+            Producto.getViewVenta=(result)=>{
+                sql.query("SELECT * FROM producto_venta",(err,res)=>{
+    
+                    if(err){
+                        console.log("error", err);
+                        result(error,null);
+                        return;
+                    }
+                    if(res.length){
+                  
+                    result(null, {msg:"Success",res:res});
+                    return;
+                    }
+                    result({error:"not_found"},null);
+                });
+                }
             Producto.remove=(id,result)=>{
                 sql.query(
                     `call ingreso_producto(${id},${0},"${null}","${null}","${null}",${null},${0},${0},${0},"${null}","delete");`,

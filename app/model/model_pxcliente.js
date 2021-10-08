@@ -79,6 +79,25 @@ Pxcliente.create=(pxcliente,result)=>{
             );
             }
     
+            Pxcliente.findByCP=(pxcliente, result)=>{
+                sql.query(
+                    `call ingreso_precioxcliente(${0},${pxcliente.idproducto},${pxcliente.idcliente},${0},${0},"viewxpro");`,
+                    (error,res)=>{
+                        if (error){
+                            console.log(error);
+                            result(error,null);
+                            return
+                        }
+                        if(res[0].length){
+                            console.log(res[0]);
+                            result(null, {message:"Success",res:res[0]});
+                        }else{
+                            result({error:"not_found"},null);
+                        }
+                    }
+                );
+                }
+        
         Pxcliente.getView=(result)=>{
             sql.query(
                 `call ingreso_precioxcliente(${0},${0},${0},${0},${0},"view");`,

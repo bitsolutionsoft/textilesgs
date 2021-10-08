@@ -38,6 +38,19 @@ exports.findC=(req,res)=>{
     }); 
 }
 
+exports.findCP=(req,res)=>{
+    Pxcliente.findByCP(new Pxcliente(req.body),(error,data)=>{
+        if(error){  
+            if(error.kind === "not_found"){
+                res.status(404).send({message:"No se encrontro ",...error});
+            }else{
+                res.status(500).send({message: "Error al consultar ",...error});
+            }
+        }else
+        { res.send(data);}
+    }); 
+}
+
 exports.getView=(req,res)=>{
  
     Pxcliente.getView((error,data) =>{

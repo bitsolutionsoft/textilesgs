@@ -45,6 +45,7 @@ module.exports=app=>{
     app.post("/producto/update",verifyToken,producto.update);
     app.post("/producto/delete/:id",verifyToken,producto.delete)
     app.get("/producto/view",verifyToken,producto.getView);
+    app.get("/producto/venta",verifyToken,producto.getViewVenta);
     app.get("/producto/:id",verifyToken,producto.findOne);
 
     app.post("/cliente",verifyToken,cliente.create);
@@ -87,13 +88,14 @@ module.exports=app=>{
     app.post("/precio",verifyToken,precio.create);
     app.post("/precio/update",verifyToken,precio.update);
     app.post("/precio/delete/:id",verifyToken,precio.delete)
-    app.get("/perpreciomiso/view",verifyToken,precio.getView);
+    app.get("/precio/view",verifyToken,precio.getView);
     app.get("/precio/:id",verifyToken,precio.findOne);
     app.get("/precio/allpro/:id",verifyToken,precio.findAllPro);
     app.get("/precio/bypro/:id",verifyToken,precio.findOnePro);
 
     app.post("/pxcliente",verifyToken,pxcliente.create);
     app.post("/pxcliente/update",verifyToken,pxcliente.update);
+    app.post("/pxcliente/bycp",verifyToken,pxcliente.findCP);
     app.post("/pxcliente/delete/:id",verifyToken,pxcliente.delete)
     app.get("/pxcliente/view",verifyToken,pxcliente.getView);
     app.get("/pxcliente/:id",verifyToken,pxcliente.findOne);
