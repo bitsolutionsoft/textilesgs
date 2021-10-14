@@ -14,10 +14,10 @@ const Factura=function(factura){
 
 Factura.create=(factura,result)=>{
     sql.query(
-      `call ingreso_factura(${factura.idfactura},${factura.idcliente},${factura.idempleado},"${factura.fecha}",${factura.total},"${detalle.estado}","new");`,
+      `call ingreso_factura(${factura.idfactura},${factura.idcliente},${factura.idempleado},"${factura.fecha}",${factura.total},"${factura.estado}","new");`,
         (error,res)=>{
             if(error){
-                console.log("Hubo un error durante la operación", error.message);
+                console.log("Hubo un error durante la operación", error);
                 result(error, null);
                 return;
             }else{
@@ -29,7 +29,7 @@ Factura.create=(factura,result)=>{
     }
     Factura.update=(factura,result)=>{
         sql.query(
-            `call ingreso_factura(${factura.idfactura},${factura.idcliente},${factura.idempleado},"${factura.fecha}",${factura.total},"${detalle.estado}","update");`,
+            `call ingreso_factura(${factura.idfactura},${factura.idcliente},${factura.idempleado},"${factura.fecha}",${factura.total},"${factura.estado}","update");`,
             (error,res)=>{
                 if(error){
                     console.log("Hubo un error durante la operación", error.message);
@@ -95,6 +95,22 @@ Factura.create=(factura,result)=>{
                     );
         
             }
+            Factura.getViewOrden=(result)=>{
+                sql.query("SELECT * FROM numero_orden",(err,res)=>{
+    
+                    if(err){
+                        console.log("error", err);
+                        result(error,null);
+                        return;
+                    }
+                    if(res.length){
+                  
+                    result(null, {message:"Success",res:res});
+                    return;
+                    }
+                    result({error:"not_found"},null);
+                });
+                }
   module.exports=Factura;
  
  

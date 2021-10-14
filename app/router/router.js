@@ -76,7 +76,9 @@ module.exports=app=>{
     app.post("/factura/update",verifyToken,factura.update);
     app.post("/factura/delete/:id",verifyToken,factura.delete)
     app.get("/factura/view",verifyToken,factura.getView);
+    app.get("/factura/orden",verifyToken,factura.getViewOrden);
     app.get("/factura/:id",verifyToken,factura.findOne);
+   
 
     app.post("/permiso",verifyToken,permiso.create);
     app.post("/permiso/update",verifyToken,permiso.update);

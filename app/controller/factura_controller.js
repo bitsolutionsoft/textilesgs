@@ -70,3 +70,16 @@ exports.update =(req, res) =>{
         }
         );
     };
+
+    exports.getViewOrden=(req,res)=>{     
+        Factura.getViewOrden((error,data)=>{
+            if(error){  
+                if(error.kind === "not_found"){
+                    res.status(404).send({message:"No se encrontro la orden ",...error});
+                }else{
+                    res.status(500).send({message: "Error al consultar la orden ",...error});
+                }
+            }else
+            { res.send(data);}
+        });
+    }
