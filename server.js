@@ -40,7 +40,7 @@ require("./app/router/router")(app)
 
 /** 8080 para clevercloud */
 /** 3001 local */
-const server=app.listen(8080,()=>{
+const server=app.listen(3000,()=>{
 console.log("servidor en ejecución");
 });
 
